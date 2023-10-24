@@ -9,7 +9,7 @@ data class Operator(
   val style: String,
   val countries: List<Country>,
 ) {
-  fun style(): Style = Style.fromString(style)
+  fun getStyle(): Style = Style.fromString(style)
 }
 
 sealed class Style {

@@ -7,12 +7,20 @@ plugins {
 kotlin {
     targetHierarchy.default()
 
-    android {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
+                freeCompilerArgs = freeCompilerArgs + listOf(
+                    "-Xcontext-receivers"
+                )
             }
         }
+    }
+
+    js {
+        browser()
+        binaries.executable()
     }
     
     listOf(

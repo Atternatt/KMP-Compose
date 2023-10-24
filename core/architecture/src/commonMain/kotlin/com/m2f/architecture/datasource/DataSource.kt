@@ -1,8 +1,6 @@
 package com.mobillium.airalo.architecture.datasource
 
 import arrow.core.Either
-import arrow.core.continuations.EffectScope
-import com.mobillium.airalo.architecture.query.Delete
 import com.mobillium.airalo.architecture.query.Get
 import com.mobillium.airalo.architecture.query.KeyQuery
 import com.mobillium.airalo.architecture.query.Put
@@ -25,7 +23,7 @@ fun interface DataSource<out F, in Q, out A> {
      * Either is a branched type that can be Left<F> or Right<A>.
      * Normally, the Left side is used for errors and the Right side is used for success.
      */
-    suspend operator fun invoke(q: Q): Either<F,A>
+    suspend operator fun invoke(q: Q): Either<F, A>
 }
 
 typealias StoreDataSource<F, K, A> = DataSource<F, KeyQuery<K, out A>, A>

@@ -4,28 +4,25 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import com.m2f.model.Operator
 import com.m2f.model.Style
 import org.company.app.theme.Gradient
-import org.company.app.theme.Promotion
 import org.company.app.theme.Transparent
 import kotlin.properties.Delegates
 
@@ -157,8 +154,8 @@ internal fun CountryPackageItem(
         )
 
         Column(modifier = Modifier
-            .shadow(2.dp)
-            .fillMaxWidth()
+            .width(400.dp)
+            .align(alignment = Alignment.Center)
             .clip(RoundedCornerShape(size = cornerRadius))
             .background(
                 brush = brush
