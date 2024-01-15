@@ -1,28 +1,34 @@
 package com.m2f.network.datasource
 
 import arrow.core.Either
+import arrow.core.raise.catch
+import com.m2f.archer.crud.GetDataSource
+import com.m2f.archer.crud.getDataSource
+import com.m2f.archer.failure.DataNotFound
+import com.m2f.archer.failure.Failure
+import com.m2f.archer.mapper.map
+import com.m2f.archer.query.Get
 import com.m2f.model.CountryPackage
 import com.m2f.network.NetworkComponent
 import com.m2f.network.model.CountryPackagesNetworkEntity
 import com.m2f.network.model.mappers.toCountyPackage
-import com.mobillium.airalo.architecture.airalo.AiraloGetDataSource
-import com.mobillium.airalo.architecture.failure.DataNotFound
-import com.mobillium.airalo.architecture.failure.Failure
-import com.mobillium.airalo.architecture.query.Get
-import io.ktor.client.call.body
-import io.ktor.client.request.get
+import io.ktor.client.call.*
+import io.ktor.client.request.*
 
-interface NetworkPackageListDataSource: AiraloGetDataSource<String, List<CountryPackage>> {
+interface NetworkPackageListDataSource : GetDataSource<String, List<CountryPackage>> {
     companion object {
-        internal operator fun invoke(networkComponent: NetworkComponent): NetworkPackageListDataSource = object : NetworkPackageListDataSource {
-            override suspend fun invoke(q: Get<String>): Either<Failure, List<CountryPackage>> =
-                Either.catch {
-                    with(networkComponent.apiNetworkConfiguration) {
-                        val response = httpClient.get("${baseUrl}countries/${q.key}").body<CountryPackagesNetworkEntity>()
-                        response.packages.map { it.toCountyPackage() }
+        internal operator fun invoke(networkComponent: NetworkComponent): GetDataSource<String, List<CountryPackage>> =
+            getDataSource<String, CountryPackagesNetworkEntity> {
+                with(networkComponent.apiNetworkConfiguration) {
+                    catch({
+                        httpClient.get("${baseUrl}countries/${it}").body<CountryPackagesNetworkEntity>()
+                    }) {
+                        raise(DataNotFound)
                     }
-                }.mapLeft { DataNotFound }
-        }
+
+                }
+            }.map { it.packages.map { it.toCountyPackage() } }
     }
 }
+
 

@@ -3,7 +3,6 @@ include(":composeApp")
 include(":core:network")
 include(":core:model")
 include(":core:domain")
-include(":core:architecture")
 
 pluginManagement {
     repositories {

@@ -39,14 +39,8 @@ kotlin {
                 //put your multiplatform dependencies here
                 implementation(project(":core:model"))
                 implementation(project(":core:network"))
-                implementation(project(":core:architecture"))
 
                 implementation(libs.bundles.arrow)
-            }
-        }
-        val commonTest by getting {
-            dependencies {
-//                implementation(kotlin("test"))
             }
         }
     }

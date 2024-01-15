@@ -25,7 +25,7 @@ kotlin {
     }
 
     listOf(
-        
+
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
@@ -68,6 +68,7 @@ kotlin {
 
         jsMain.dependencies {
             implementation(compose.html.core)
+            api(devNpm("copy-webpack-plugin", "9.1.0"))
         }
 
         iosMain.dependencies {

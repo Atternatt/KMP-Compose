@@ -1,11 +1,11 @@
 package com.m2f.network
 
+import com.m2f.archer.crud.GetDataSource
 import com.m2f.model.CountryPackage
 import com.m2f.network.datasource.NetworkPackageListDataSource
-import com.mobillium.airalo.architecture.airalo.AiraloGetDataSource
 
 interface NetworkModule {
-    val networkPackageListDataSource: AiraloGetDataSource<String, List<CountryPackage>>
+    val networkPackageListDataSource: GetDataSource<String, List<CountryPackage>>
 
     companion object {
         operator fun invoke(): NetworkModule = DefaultNetworkModule()
@@ -14,5 +14,5 @@ interface NetworkModule {
 
 internal class DefaultNetworkModule : NetworkModule {
 
-    override val networkPackageListDataSource: AiraloGetDataSource<String, List<CountryPackage>> by lazy { NetworkPackageListDataSource(NetworkComponent()) }
+    override val networkPackageListDataSource: GetDataSource<String, List<CountryPackage>> by lazy { NetworkPackageListDataSource(NetworkComponent()) }
 }

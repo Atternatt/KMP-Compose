@@ -39,7 +39,6 @@ kotlin {
             dependencies {
                 implementation(libs.bundles.network)
                 api(project(":core:model"))
-                implementation(project(":core:architecture"))
                 api(libs.bundles.arrow)
             }
         }
