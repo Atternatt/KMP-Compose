@@ -24,7 +24,7 @@ kotlin {
     }
     
     listOf(
-        iosX64(),
+
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
@@ -55,5 +55,12 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 24
+    }
+    packaging {
+        resources {
+            excludes += "**/attach_hotspot_windows.dll"
+            excludes += "META-INF/licenses/**"
+            excludes += "META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }

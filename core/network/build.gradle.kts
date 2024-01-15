@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.multiplatform)
     id("com.android.library")
-    kotlin("plugin.serialization") version "1.9.10"
+    kotlin("plugin.serialization") version "1.9.21"
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -25,7 +25,7 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
+        
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {

@@ -7,9 +7,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -27,7 +25,7 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
+        
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
@@ -38,55 +36,45 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(compose.runtime)
-                implementation(compose.material3)
-                implementation(libs.libres)
-                implementation(libs.voyager.navigator)
-                implementation(libs.composeImageLoader)
-                implementation(libs.napier)
-                implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.ktor)
-                implementation(libs.composeIcons.featherIcons)
-                implementation(libs.kotlinx.serialization.json)
-                implementation(libs.kotlinx.datetime)
-                implementation(libs.koin.core)
-                implementation(project(":core:model"))
-                implementation(project(":core:domain"))
-                implementation(libs.bundles.arrow)
-            }
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.material3)
+            implementation(libs.libres)
+            implementation(libs.voyager.navigator)
+            implementation(libs.composeImageLoader)
+            implementation(libs.napier)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.ktor)
+            implementation(libs.composeIcons.featherIcons)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.koin.core)
+            implementation(project(":core:model"))
+            implementation(project(":core:domain"))
+            implementation(libs.bundles.arrow)
         }
 
-        val commonTest by getting {
-            dependencies {
-                //implementation(kotlin("test"))
-            }
+        androidMain.dependencies {
+            implementation(libs.androidx.appcompat)
+            implementation(libs.androidx.activityCompose)
+            implementation(libs.compose.uitooling)
+            implementation(libs.kotlinx.coroutines.android)
+            implementation(libs.ktor.client.okhttp)
         }
 
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.androidx.appcompat)
-                implementation(libs.androidx.activityCompose)
-                implementation(libs.compose.uitooling)
-                implementation(libs.kotlinx.coroutines.android)
-                implementation(libs.ktor.client.okhttp)
-            }
+        jvmMain.dependencies {
+            implementation(compose.html.core)
         }
 
-        val jsMain by getting {
-            dependencies {
-                implementation(compose.html.core)
-            }
+        jsMain.dependencies {
+            implementation(compose.html.core)
         }
 
-        val iosMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.darwin)
-            }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
-
     }
+
 }
 
 android {
